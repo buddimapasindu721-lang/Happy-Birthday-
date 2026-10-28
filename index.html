@@ -3,350 +3,216 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Happy Birthday My Love ❤️</title>
-
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  overflow: hidden;
-  background: radial-gradient(circle, #650b2b, #17020d 65%, #030105);
-  color: white;
-  font-family: Georgia, serif;
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{
+ background:radial-gradient(ellipse at 50% 40%,#720c32,#260313 55%,#050108);
+ color:white;font-family:Georgia,serif;touch-action:none
 }
-
-#scene {
-  height: 100vh;
-  height: 100dvh;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+#scene{height:100vh;height:100dvh;width:100%;position:relative;overflow:hidden}
+.glow{position:absolute;width:75vw;height:75vw;max-width:500px;max-height:500px;left:50%;top:25%;transform:translate(-50%,-50%);border-radius:50%;background:#ff174d22;box-shadow:0 0 90px #ff174d55;animation:pulse 3s infinite}
+#heart{
+ position:absolute;top:19%;left:50%;transform:translateX(-50%);
+ font-size:clamp(110px,29vw,190px);z-index:3;
+ filter:drop-shadow(0 0 24px #ff174d);animation:beat 1s infinite;
 }
-
-.glow {
-  position: absolute;
-  width: 70vw;
-  height: 70vw;
-  border-radius: 50%;
-  background: #ff174d30;
-  box-shadow: 0 0 100px #ff174d55;
-  animation: pulse 2s infinite;
+#instruction{position:absolute;top:40%;width:100%;text-align:center;font:13px Arial;letter-spacing:2px;color:#ffd4e1;padding:0 15px}
+#bow{position:absolute;bottom:19%;left:50%;transform:translateX(-50%);font-size:72px;filter:drop-shadow(0 0 12px #ff5280);z-index:4}
+#arrow{
+ position:absolute;left:calc(50% - 24px);bottom:26%;width:95px;height:42px;
+ z-index:8;display:flex;align-items:center;justify-content:center;
+ font-size:57px;line-height:1;cursor:grab;user-select:none;
+ touch-action:none;filter:drop-shadow(0 0 9px #ffd36c);
+ transform:rotate(-90deg);transform-origin:center;
 }
-
-#heart {
-  position: absolute;
-  top: 23%;
-  font-size: clamp(110px, 30vw, 190px);
-  z-index: 3;
-  cursor: pointer;
-  filter: drop-shadow(0 0 25px #ff174d);
-  animation: beat 1s infinite;
+#arrow:active{cursor:grabbing}
+#hint2{position:absolute;bottom:11%;width:100%;text-align:center;font:12px Arial;letter-spacing:2px;color:#ffb9cd;animation:blink 1.5s infinite}
+#burst{position:absolute;top:19%;left:50%;transform:translate(-50%,-50%);font-size:100px;opacity:0;z-index:6;pointer-events:none}
+#burst.go{animation:burst .8s ease-out forwards}
+#surprise{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px 12px 70px;opacity:0;transform:scale(.7);pointer-events:none;z-index:5;text-align:center}
+#surprise.show{animation:reveal 1.5s ease-out forwards}
+.photo-frame{
+ width:min(58vw,250px);height:min(58vw,250px);padding:6px;flex-shrink:0;
+ border-radius:50%;background:linear-gradient(135deg,#fff0a4,#ff3478,#ffe3a1);
+ box-shadow:0 0 28px #ff3678,0 0 75px #ff174d70;animation:float 3s infinite
 }
-
-#hint {
-  position: absolute;
-  top: 46%;
-  width: 100%;
-  font: 13px Arial, sans-serif;
-  letter-spacing: 3px;
-  color: pink;
-  animation: blink 1.5s infinite;
-}
-
-#arrow {
-  position: absolute;
-  top: 25%;
-  left: -30%;
-  font-size: 75px;
-  z-index: 5;
-  opacity: 0;
-  transform: rotate(-15deg);
-}
-
-#arrow.shoot {
-  animation: shoot .65s ease-in forwards;
-}
-
-#explosion {
-  position: absolute;
-  top: 25%;
-  font-size: 100px;
-  opacity: 0;
-  z-index: 6;
-  pointer-events: none;
-}
-
-#explosion.boom {
-  animation: boom .7s forwards;
-}
-
-#surprise {
-  position: absolute;
-  top: 8%;
-  width: 100%;
-  padding: 0 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 13px;
-  opacity: 0;
-  transform: scale(.5);
-  z-index: 4;
-  pointer-events: none;
-}
-
-#surprise.show {
-  animation: reveal 1.5s ease-out forwards;
-}
-
-.photo-frame {
-  width: min(58vw, 255px);
-  height: min(58vw, 255px);
-  padding: 6px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #fff0a8, #ff3978, #ffd77a);
-  box-shadow: 0 0 30px #ff3678, 0 0 75px #ff174d70;
-  animation: float 3s ease-in-out infinite;
-}
-
-.photo-frame img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center 30%;
-  border: 3px solid #fff0e0;
-}
-
-h1 {
-  margin: 4px 0 0;
-  font-size: clamp(30px, 8vw, 47px);
-  color: #ffe4a1;
-  text-shadow: 0 0 12px #ffb52e, 0 0 25px #ff2465;
-}
-
-h2 {
-  margin: 0;
-  font-size: clamp(35px, 10vw, 58px);
-  font-style: italic;
-  color: #ff9dbb;
-  text-shadow: 0 0 15px #ff2871;
-}
-
-.message {
-  font: 13px Arial, sans-serif;
-  letter-spacing: 2px;
-  color: #ffe4ec;
-}
-
-.petal {
-  position: absolute;
-  top: -40px;
-  z-index: 7;
-  pointer-events: none;
-  animation: fall linear forwards;
-}
-
-.heart-small {
-  position: absolute;
-  bottom: -40px;
-  z-index: 2;
-  animation: floatUp linear forwards;
-  pointer-events: none;
-}
-
-#again {
-  position: absolute;
-  bottom: 22px;
-  z-index: 10;
-  opacity: 0;
-  pointer-events: none;
-  padding: 12px 22px;
-  color: white;
-  border: 1px solid pink;
-  border-radius: 30px;
-  background: #ffffff18;
-  font-size: 15px;
-}
-
-#again.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-@keyframes beat {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.13); }
-}
-
-@keyframes pulse {
-  50% { transform: scale(1.15); }
-}
-
-@keyframes blink {
-  50% { opacity: .45; }
-}
-
-@keyframes shoot {
-  from { left: -30%; opacity: 1; }
-  to { left: 43%; opacity: 0; }
-}
-
-@keyframes boom {
-  0% { opacity: 0; transform: scale(.2); }
-  35% { opacity: 1; transform: scale(1.8); }
-  100% { opacity: 0; transform: scale(3); }
-}
-
-@keyframes reveal {
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes float {
-  50% { transform: translateY(-9px); }
-}
-
-@keyframes fall {
-  0% { transform: translateY(-5vh) rotate(0); opacity: 0; }
-  10% { opacity: 1; }
-  100% {
-    transform: translate(var(--drift), 115vh) rotate(var(--spin));
-    opacity: .15;
-  }
-}
-
-@keyframes floatUp {
-  from { transform: translateY(0) rotate(0); opacity: 0; }
-  15% { opacity: .9; }
-  to { transform: translateY(-120vh) rotate(35deg); opacity: 0; }
-}
+.photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:50%;border:3px solid #fff2e6}
+h1{margin:3px 0 0;font-size:clamp(29px,8vw,48px);color:#ffe4a1;text-shadow:0 0 15px #ffad24,0 0 25px #ff2465}
+h2{margin:0;font-size:clamp(37px,10vw,60px);font-style:italic;color:#ff9cba;text-shadow:0 0 15px #ff2871}
+.msg{font:12px Arial;letter-spacing:2px;color:#ffe4ec}
+.petal{position:absolute;top:-40px;z-index:7;pointer-events:none;animation:fall linear forwards}
+.small-heart{position:absolute;bottom:-40px;z-index:2;pointer-events:none;animation:rise linear forwards}
+#again{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:10;padding:12px 22px;border:1px solid pink;border-radius:30px;background:#ffffff18;color:white;font-size:14px;opacity:0;pointer-events:none;white-space:nowrap}
+#again.show{opacity:1;pointer-events:auto}
+@keyframes beat{0%,100%{scale:1}50%{scale:1.12}}
+@keyframes pulse{50%{scale:1.15;opacity:.7}}
+@keyframes blink{50%{opacity:.45}}
+@keyframes burst{0%{opacity:0;scale:.2}35%{opacity:1;scale:1.8}100%{opacity:0;scale:3}}
+@keyframes reveal{to{opacity:1;transform:scale(1)}}
+@keyframes float{50%{translate:0 -8px}}
+@keyframes fall{0%{translate:0 -5vh;rotate:0deg;opacity:0}10%{opacity:1}100%{translate:var(--drift) 115vh;rotate:var(--spin);opacity:.1}}
+@keyframes rise{0%{translate:0 0;opacity:0}15%{opacity:1}100%{translate:var(--drift) -115vh;opacity:0}}
 </style>
 </head>
-
 <body>
 <div id="scene">
-  <div class="glow"></div>
+ <div class="glow"></div>
+ <div id="heart">❤️</div>
+ <div id="instruction">SHOOT THE HEART FOR A SURPRISE ❤️</div>
+ <div id="bow">🏹</div>
+ <div id="arrow" role="button" aria-label="Drag and release the arrow">➶</div>
+ <div id="hint2">👆 DRAG THE ARROW & RELEASE</div>
+ <div id="burst">💥</div>
 
-  <div id="heart">❤️</div>
-  <div id="hint">TOUCH THE HEART ❤️</div>
-  <div id="arrow">➶</div>
-  <div id="explosion">💥</div>
-
-  <div id="surprise">
-    <div class="photo-frame">
-      <img src="wife.jpg" alt="My Love">
-    </div>
-
-    <h1>Happy Birthday</h1>
-    <h2>My Love ❤️</h2>
-    <div class="message">
-      YOU ARE MY WORLD 🌹
-    </div>
+ <div id="surprise">
+  <div class="photo-frame">
+   <img src="wife.jpg" alt="My Love">
   </div>
-
-  <button id="again">↻ Play Again ❤️</button>
+  <h1>Happy Birthday</h1>
+  <h2>My Love ❤️</h2>
+  <div class="msg">YOU ARE MY WORLD 🌹</div>
+ </div>
+ <button id="again">↻ PLAY AGAIN ❤️</button>
 </div>
 
 <script>
-const heart = document.getElementById("heart");
-const arrow = document.getElementById("arrow");
-const explosion = document.getElementById("explosion");
-const surprise = document.getElementById("surprise");
-const hint = document.getElementById("hint");
-const again = document.getElementById("again");
+const scene=document.getElementById('scene');
+const arrow=document.getElementById('arrow');
+const heart=document.getElementById('heart');
+const bow=document.getElementById('bow');
+const burst=document.getElementById('burst');
+const surprise=document.getElementById('surprise');
+const instruction=document.getElementById('instruction');
+const hint=document.getElementById('hint2');
+const again=document.getElementById('again');
 
-let started = false;
-let timers = [];
+let dragging=false,started=false,pointerId=null;
+let startX=0,startY=0,lastX=0,lastY=0;
+let timers=[];
 
-function clearTimers() {
-  timers.forEach(clearTimeout);
-  timers = [];
+function later(fn,ms){timers.push(setTimeout(fn,ms))}
+function clearTimers(){timers.forEach(clearTimeout);timers=[]}
+
+function placeArrow(x,y){
+ arrow.style.left=(x-arrow.offsetWidth/2)+'px';
+ arrow.style.top=(y-arrow.offsetHeight/2)+'px';
+ arrow.style.bottom='auto';
 }
 
-function later(fn, ms) {
-  timers.push(setTimeout(fn, ms));
+function resetArrowPosition(){
+ arrow.style.left='calc(50% - 24px)';
+ arrow.style.top='auto';
+ arrow.style.bottom='26%';
+ arrow.style.transform='rotate(-90deg)';
 }
 
-function makePetals() {
-  const flowers = ["🌹", "🌸", "🌺", "🌷", "💗", "✨", "❤️"];
-
-  for (let i = 0; i < 180; i++) {
-    const p = document.createElement("div");
-    p.className = "petal";
-    p.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.fontSize = (14 + Math.random() * 22) + "px";
-    p.style.animationDuration = (4 + Math.random() * 5) + "s";
-    p.style.animationDelay = (Math.random() * 1.8) + "s";
-    p.style.setProperty("--drift", (Math.random() * 220 - 110) + "px");
-    p.style.setProperty("--spin", (Math.random() * 1000 - 500) + "deg");
-
-    document.getElementById("scene").appendChild(p);
-    later(() => p.remove(), 11000);
-  }
-
-  for (let i = 0; i < 24; i++) {
-    const h = document.createElement("div");
-    h.className = "heart-small";
-    h.textContent = "❤️";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.fontSize = (15 + Math.random() * 25) + "px";
-    h.style.animationDuration = (5 + Math.random() * 5) + "s";
-
-    document.getElementById("scene").appendChild(h);
-    later(() => h.remove(), 11000);
-  }
-}
-
-function play() {
-  if (started) return;
-  started = true;
-
-  hint.style.display = "none";
-  arrow.classList.remove("shoot");
-  explosion.classList.remove("boom");
-
-  void arrow.offsetWidth;
-  arrow.classList.add("shoot");
-
-  later(() => {
-    heart.style.display = "none";
-    explosion.classList.add("boom");
-    makePetals();
-  }, 550);
-
-  later(() => {
-    surprise.classList.add("show");
-    again.classList.add("show");
-  }, 1100);
-}
-
-heart.addEventListener("click", play);
-
-again.addEventListener("click", () => {
-  clearTimers();
-  started = false;
-
-  document.querySelectorAll(".petal, .heart-small")
-    .forEach(el => el.remove());
-
-  heart.style.display = "block";
-  hint.style.display = "block";
-  arrow.classList.remove("shoot");
-  explosion.classList.remove("boom");
-  surprise.classList.remove("show");
-  again.classList.remove("show");
-
-  void surprise.offsetWidth;
+arrow.addEventListener('pointerdown',e=>{
+ if(started)return;
+ e.preventDefault();
+ dragging=true;
+ pointerId=e.pointerId;
+ arrow.setPointerCapture(pointerId);
+ const r=arrow.getBoundingClientRect();
+ startX=r.left+r.width/2;
+ startY=r.top+r.height/2;
+ lastX=startX;lastY=startY;
+ placeArrow(startX,startY);
+ arrow.style.transform='rotate(-90deg)';
+ hint.textContent='PULL BACK AND RELEASE 🏹';
 });
 
+arrow.addEventListener('pointermove',e=>{
+ if(!dragging||e.pointerId!==pointerId)return;
+ e.preventDefault();
+ lastX=e.clientX;lastY=e.clientY;
+ placeArrow(lastX,lastY);
+});
+
+arrow.addEventListener('pointerup',e=>{
+ if(!dragging||e.pointerId!==pointerId)return;
+ dragging=false;
+ const dx=startX-lastX,dy=startY-lastY;
+ // A small pull is enough; release to launch toward the heart.
+ launchArrow();
+});
+
+arrow.addEventListener('pointercancel',()=>{
+ if(dragging){dragging=false;resetArrowPosition()}
+});
+
+function launchArrow(){
+ if(started)return;
+ started=true;
+ instruction.style.display='none';
+ hint.style.display='none';
+ bow.style.display='none';
+ arrow.style.transition='left .55s cubic-bezier(.2,.7,.2,1),top .55s cubic-bezier(.2,.7,.2,1),opacity .2s .4s';
+ arrow.style.left='calc(50% - 24px)';
+ arrow.style.top='14%';
+ arrow.style.bottom='auto';
+ arrow.style.transform='rotate(-90deg)';
+
+ later(()=>{
+  heart.style.display='none';
+  arrow.style.opacity='0';
+  burst.classList.add('go');
+  showerPetals();
+ },530);
+
+ later(()=>{
+  surprise.classList.add('show');
+  again.classList.add('show');
+ },1050);
+}
+
+function showerPetals(){
+ const flowers=['🌹','🌸','🌺','🌷','💗','✨','❤️','💖'];
+ for(let i=0;i<220;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  p.textContent=flowers[Math.floor(Math.random()*flowers.length)];
+  p.style.left=Math.random()*100+'vw';
+  p.style.fontSize=(14+Math.random()*22)+'px';
+  p.style.animationDuration=(4+Math.random()*5)+'s';
+  p.style.animationDelay=(Math.random()*1.5)+'s';
+  p.style.setProperty('--drift',(Math.random()*220-110)+'px');
+  p.style.setProperty('--spin',(Math.random()*1000-500)+'deg');
+  scene.appendChild(p);
+  later(()=>p.remove(),11000);
+ }
+ for(let i=0;i<32;i++){
+  const h=document.createElement('div');
+  h.className='small-heart';
+  h.textContent='❤️';
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=(15+Math.random()*24)+'px';
+  h.style.animationDuration=(5+Math.random()*5)+'s';
+  h.style.setProperty('--drift',(Math.random()*140-70)+'px');
+  scene.appendChild(h);
+  later(()=>h.remove(),11000);
+ }
+}
+
+again.addEventListener('click',()=>{
+ clearTimers();
+ started=false;
+ document.querySelectorAll('.petal,.small-heart').forEach(el=>el.remove());
+ surprise.classList.remove('show');
+ again.classList.remove('show');
+ burst.classList.remove('go');
+ heart.style.display='block';
+ arrow.style.opacity='1';
+ arrow.style.transition='none';
+ bow.style.display='block';
+ instruction.style.display='block';
+ hint.style.display='block';
+ hint.textContent='👆 DRAG THE ARROW & RELEASE';
+ resetArrowPosition();
+ void surprise.offsetWidth;
+});
 </script>
 </body>
 </html>
